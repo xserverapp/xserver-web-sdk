@@ -198,11 +198,13 @@ include $DATABASE_PATH.'_config.php';
 				$.ajax({
 					url : TABLES_PATH + 'forgot-password.php?email=' + result.value,
 					success: function(data) {
-						Swal.fire({
-							title: 'Cool',
-							text: 'You will receive an email soon with a link to reset your password.',
-							icon: 'success',
-						})
+						if (data == 'e_301') {
+							Swal.fire({ title: 'Oops...', text: 'Email does not exist in the database. Try a new one.', icon: 'error' });
+						} else if (data == 'e_302') {
+							Swal.fire({ title: 'Oops...', text: 'You have signed in with a Social account, password cannot be changed.', icon: 'error' });
+						} else {
+							Swal.fire({ title: 'Cool', text: 'You will receive an email soon with a link to reset your password.', icon: 'success' });
+						}
 					// error
 					}, error: function(e) { 
 						errorAlert('Reset Password -> Something went wrong: ' + e.message);
