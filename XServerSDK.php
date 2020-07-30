@@ -393,7 +393,7 @@ include $DATABASE_PATH.'_config.php';
 					console.log('iOS PUSH: ' + data);
 				// error
 				}, error: function(e) {  
-					Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong.', });
+					console.log('XSSendPushNotification -> Something went wrong: ' + e.message);
 			}});
 		}//./ For
 
@@ -408,7 +408,7 @@ include $DATABASE_PATH.'_config.php';
 					console.log('ANDROID PUSH: ' + data);
 				// error
 				}, error: function(e) {  
-					Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong.', });
+					console.log('XSSendPushNotification -> Something went wrong: ' + e.message);
 			}});
 		}//./ For
 	}
