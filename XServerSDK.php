@@ -334,7 +334,7 @@ include $DATABASE_PATH.'_config.php';
 				data: params,
 				async: false,
 				success: function(data) {
-					if (data != 'saved') {
+					if (!data.includes('ID_id')) {
 						errorAlert("Something went wrong. Try again");
 					} else {
 						result = data;
