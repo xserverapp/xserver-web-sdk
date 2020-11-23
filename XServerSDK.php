@@ -378,38 +378,41 @@ include $DATABASE_PATH.'_config.php';
 	// MARK - SEND PUSH NOTIFICATION
 	//----------------------------------------
 	function XSSendPushNotification(tokensStr, message, pushType) {
-		var audience = 'All';
 		var tokens = tokensStr.split(",");
 		if (tokens[1] == '') { tokens.splice(tokens.indexOf(1, 1)); }
 		
 		// Send iOS Push
 		for(var i = 0 ; i<tokens.length; i++){
-			var queryPath = DATABASE_PATH + '_Push/send-ios-push.php?';
-			$.ajax({
-				url : queryPath,
-				type: 'POST',
-				data: 'deviceToken=' + tokens[i] + '&message=' + message + '&pushType=' + pushType,
-				success: function(data) {
-					console.log('iOS PUSH: ' + data);
-				// error
-				}, error: function(e) {  
-					console.log('XSSendPushNotification -> Something went wrong: ' + e.message);
-			}});
+			if (tokens[i] != '') {
+				var queryPath = DATABASE_PATH + '_Push/send-ios-push.php?';
+				$.ajax({
+					url : queryPath,
+					type: 'POST',
+					data: 'deviceToken=' + tokens[i] + '&message=' + message + '&pushType=' + pushType,
+					success: function(data) {
+						console.log('iOS PUSH: ' + data);
+					// error
+					}, error: function(e) {  
+						console.log('XSSendPushNotification -> Something went wrong: ' + e.message);
+				}});
+			}
 		}//./ For
 
 		// Send Android push
 		for(var i = 0 ; i<tokens.length; i++){
-			var queryPath = DATABASE_PATH + '_Push/send-android-push.php?';
-			$.ajax({
-				url : queryPath,
-				type: 'POST',
-				data: 'deviceToken=' + tokens[i] + '&message=' + message + '&pushType=' + pushType,
-				success: function(data) {
-					console.log('ANDROID PUSH: ' + data);
-				// error
-				}, error: function(e) {  
-					console.log('XSSendPushNotification -> Something went wrong: ' + e.message);
-			}});
+			if (tokens[i] != '') {
+				var queryPath = DATABASE_PATH + '_Push/send-android-push.php?';
+				$.ajax({
+					url : queryPath,
+					type: 'POST',
+					data: 'deviceToken=' + tokens[i] + '&message=' + message + '&pushType=' + pushType,
+					success: function(data) {
+						console.log('ANDROID PUSH: ' + data);
+					// error
+					}, error: function(e) {  
+						console.log('XSSendPushNotification -> Something went wrong: ' + e.message);
+				}});
+			}
 		}//./ For
 	}
 
