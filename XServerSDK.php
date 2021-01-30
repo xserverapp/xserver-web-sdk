@@ -308,7 +308,7 @@ include $DATABASE_PATH.'_config.php';
 				}
 			// error
 			}, error: function(x, textStatus, m) { 
-				console.log('XSgetPointer -> Something went wrong: ' + textStatus);
+				console.log('XSGetPointer -> Something went wrong: ' + textStatus);
 		}});
 	return pointer;
 	}
