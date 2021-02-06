@@ -111,7 +111,7 @@ include $DATABASE_PATH.'_config.php';
 	//---------------------------------
 	function XSSignUp(params) {
 		// <script> tag not allowed!
-		if (params.includes('<script>')) {
+		if (JSON.stringify(params).includes('<script>')) {
 			errorAlert("The <script> tag is not allowed, please correct your data");
 			return;
 
@@ -133,25 +133,24 @@ include $DATABASE_PATH.'_config.php';
 					} else if (data.includes('-')) {
 						var cuArr = data.split("-");
 						if (cuArr[1] == 'true') {
-							console.log('Existing Google User');
+							console.log('Existing Social User');
 							setCurrentUserSession(cuArr[0]);
 
 							setTimeout(function(){ window.location.replace("index.php"); }, 1000);
-
+						
 						} else {
 							setTimeout(function(){
 								console.log('New Google User');
 								setCurrentUserSession(cuArr[0]);
 
-								var p2 =
-									'tableName=Users' +
-									'&ID_id=' + cuArr[0]
+								var p2 = {
+									tableName: 'Users',
+									ID_id: cuArr[0],
 
-									// Additional data
-									// + '&ST_fullname=' + localStorage.getItem('fullName') +
-									// + '&FL_file=' + localStorage.getItem('profilePicURL')
-								;
-
+									// Additional data (example)
+									// ST_fullname: localStorage.getItem('fullName'),
+									// FL_file: localStorage.getItem('profilePicURL')
+								};
 								XSObject(p2);
 
 								// Go to main page 
@@ -159,20 +158,19 @@ include $DATABASE_PATH.'_config.php';
 							}, 1000);
 						}
 
-						// Additional data for normal Sign up
+					// Additional data for normal Sign up
 					} else {
 						setTimeout(function(){
 							setCurrentUserSession(data);
 
-							var p2 =
-								'tableName=Users' +
-								'&ID_id=' + data
+							var p2 = {
+								tableName: 'Users',
+								ID_id: data,
 
-								// Additional data
-								// + '&ST_fullname=' + $('#fullName').val() +
-								// + '&FL_file=' + 'https://xscoder.com/xserver/assets/img/default_avatar.png'
-							;
-					            
+								// Additional data (example)
+								// ST_fullname: $('#fullName').val(),
+								// FL_file: 'https://xserver.app/assets/img/default_avatar.png'
+							};
 					        XSObject(p2);
 
 					        // Go to main page 
@@ -322,7 +320,7 @@ include $DATABASE_PATH.'_config.php';
 		var result;
 
 		// <script> tag not allowed!
-		if (params.includes('<script>')) {
+		if (JSON.stringify(params).includes('<script>')){
 			errorAlert("The <script> tag is not allowed, please correct your data");
 			return;
 
