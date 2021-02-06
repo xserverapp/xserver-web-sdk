@@ -144,14 +144,13 @@ include $DATABASE_PATH.'_config.php';
 								console.log('New Google User');
 								setCurrentUserSession(cuArr[0]);
 
-								var p2 = {
-									tableName: 'Users',
-									ID_id: cuArr[0],
+								var p2 = {'tableName':'Users'};
+								p2['ID_id']= cuArr[0];
 
-									// Additional data (example)
-									// ST_fullname: localStorage.getItem('fullName'),
-									// FL_file: localStorage.getItem('profilePicURL')
-								};
+								// Additional data (example)
+								// p2['ST_fullname'] = localStorage.getItem('fullName');
+								// ps['FL_file'] = localStorage.getItem('profilePicURL');
+								
 								XSObject(p2);
 
 								// Go to main page 
@@ -164,14 +163,13 @@ include $DATABASE_PATH.'_config.php';
 						setTimeout(function(){
 							setCurrentUserSession(data);
 
-							var p2 = {
-								tableName: 'Users',
-								ID_id: data,
+							var p2 = {'tableName':'Users'];
+							p2['ID_id'] = data;
 
-								// Additional data (example)
-								// ST_fullname: $('#fullName').val(),
-								// FL_file: 'https://xserver.app/assets/img/default_avatar.png'
-							};
+							// Additional data (example)
+							// p2['ST_fullname'] = $('#fullName').val();
+							// p2['FL_file'] = 'https://yourserver.app/assets/img/default_avatar.png';
+							
 					        XSObject(p2);
 
 					        // Go to main page 
