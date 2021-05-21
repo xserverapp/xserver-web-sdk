@@ -2,7 +2,7 @@
 /**
     XServer Web SDK
 
-    © XScoder 2021
+    © XServer 2021
     All Rights reserved
 
     * IMPORTANT *
